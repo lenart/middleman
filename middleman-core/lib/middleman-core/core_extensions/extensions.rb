@@ -37,9 +37,6 @@ module Middleman
       class << self
         # @private
         def registered(app)
-          # Using for version parsing
-          require "rubygems"
-
           app.define_hook :after_configuration
           app.define_hook :before_configuration
           app.define_hook :build_config
@@ -123,8 +120,8 @@ module Middleman
         # Load features before starting server
         def initialize
           super
-
-          self.class.inst = self
+      
+          self.class.singleton = self
           run_hook :before_configuration
 
           # Search the root of the project for required files
